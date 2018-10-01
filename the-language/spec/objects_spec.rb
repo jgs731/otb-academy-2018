@@ -41,6 +41,6 @@ RSpec.describe "Objects in ruby" do
     copy = obj.clone
 
     expect( obj != copy ).to eq(false)
-    expect( obj.object_id != copy.object_id ).to eq(false)
+    expect( obj.object_id != copy.object_id ).to eq(true)
   end
 end
