@@ -62,7 +62,7 @@ RSpec.describe "Ruby Arrays" do
     expect( ["New York", "Paris", "London"] ).to eq array[0..2]
     expect( ["New York", "Paris"] ).to eq array[0...2]
     expect( ["London", "Milan"] ).to eq array[2..-1]
-    expect( ["London", "Paris"] ).to eq array[-2..1]
+    expect( [] ).to eq array[-2..1]
   end
 
   it "can be used as a stack" do
