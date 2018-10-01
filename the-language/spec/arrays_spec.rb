@@ -70,11 +70,11 @@ RSpec.describe "Ruby Arrays" do
 
     array.push("on the end")
 
-    expect( array ).to eq( __ )
+    expect( array ).to eq([1,2,'on the end'])
 
     value = array.pop
-    expect( value ).to eq( __ )
-    expect( array ).to eq( __ )
+    expect( value ).to eq('on the end')
+    expect( array ).to eq([1,2])
   end
 
   it "can be used as a queue" do
@@ -82,13 +82,13 @@ RSpec.describe "Ruby Arrays" do
     array.push(:third)
 
     value = array.shift
-    expect( value ).to eq( __ )
-    expect( array ).to eq( __ )
+    expect( value ).to eq(:first)
+    expect( array ).to eq([:second, :third])
 
     # Sometimes you need to get things to the front of a queue
     array.unshift(value)
 
-    expect( array ).to eq( __ )
+    expect( array ).to eq([:first, :second, :third])
   end
 
 end
