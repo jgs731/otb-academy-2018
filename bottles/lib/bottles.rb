@@ -8,13 +8,27 @@ class Bottles
   end
 
   def verse(number)
+    bottle_number = BottleNumber.new(number)
+    next_bottle_number = BottleNumber.new(bottle_number.successor)
     <<~VERSE
-      #{ quantity(number).capitalize } #{ container(number) } of beer on the wall, #{ quantity(number) } #{ container(number) } of beer.
-      #{ action(number) }, #{ quantity(successor(number)) } #{ container(successor(number)) } of beer on the wall.
-      VERSE
+      #{ bottle_number.quantity_and_container.capitalize } of beer on the wall, #{ bottle_number.quantity_and_container } of beer.
+      #{ bottle_number.action }, #{ next_bottle_number.quantity_and_container } of beer on the wall.
+    VERSE
   end
-
-  def container(number)
+end
+    
+class BottleNumber
+  attr_reader :number # same as storing the number as an instance variable (to be used throughout the class)
+    
+  def initialize(number)
+    @number = number 
+  end
+    
+  def quantity_and_container
+    "#{quantity} #{container}"
+  end
+  
+  def container
     if number == 1
       "bottle"
     else
@@ -22,7 +36,7 @@ class Bottles
     end
   end
 
-  def pronoun(number)
+  def pronoun
     if number == 1
       "it"
     else
@@ -30,27 +44,27 @@ class Bottles
     end
   end
 
-  def quantity(number)
+  def quantity
     if number == 0
       "no more"
     else
       number.to_s
     end
   end
-
-  def action(number)
+    
+  def action
     if number == 0
       "Go to the store and buy some more"
     else
-      "Take #{ pronoun(number) } down and pass it around"
+      "Take #{ pronoun } down and pass it around"
     end
   end
 
-  def successor(number)
+  def successor
     if number == 0
       99
     else
       number - 1
     end
   end
-end
+end 
