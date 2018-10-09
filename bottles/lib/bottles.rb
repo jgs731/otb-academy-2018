@@ -1,4 +1,4 @@
-class Bottles
+class Bottles  
   def sing
     verses(99,0)
   end
@@ -8,64 +8,85 @@ class Bottles
   end
 
   def verse(number)
-    bottle_number = BottleNumber.new(number)
-    next_bottle_number = BottleNumber.new(bottle_number.successor)
+    bottle_number = BottleNumber.for(number)
+    next_bottle_number = bottle_number.successor
     <<~VERSE
       #{ bottle_number.to_s.capitalize } of beer on the wall, #{ bottle_number } of beer.
       #{ bottle_number.action }, #{ next_bottle_number } of beer on the wall.
       VERSE
   end
+end
 
   class BottleNumber
     attr_reader :number
-
+      
+    def self.for(number)
+      if number == 0
+        BottleNumberZero.new(number)
+      elsif number == 1
+        BottleNumberOne.new(number)
+      elsif number == 6
+        BottleNumberSix.new(number)
+      else
+        BottleNumber.new(number)
+      end
+    end
+      
     def initialize(number)
       @number = number
     end
 
     def container
-      if number == 1
-        "bottle"
-      else
-        "bottles"
-      end
+      "bottles"
     end
 
     def pronoun
-      if number == 1
-        "it"
-      else
-        "one"
-      end
+      "one"
     end
 
     def quantity
-      if number == 0
-        "no more"
-      else
-        number.to_s
-      end
+      number.to_s
     end
 
     def action
-      if number == 0
-        "Go to the store and buy some more"
-      else
-        "Take #{ pronoun } down and pass it around"
-      end
+      "Take #{ pronoun } down and pass it around"
     end
 
     def successor
-      if number == 0
-        99
-      else
-        number - 1
-      end
+      BottleNumber.for(number - 1)
     end
     
     def to_s
       "#{quantity} #{container}"
     end
+end
+
+class BottleNumberZero < BottleNumber
+  def quantity
+    "no more"
+  end
+    
+  def successor
+    BottleNumber.for(99)
+  end
+    
+  def action
+    "Go to the store and buy some more"
   end
 end
 
+class BottleNumberOne < BottleNumber
+  def pronoun
+    "it"
+  end
+    
+  def container
+    "bottle"
+  end    
+end
+
+class BottleNumberSix < BottleNumber
+  def to_s
+    "one #{quantity} pack"
+  end    
+end

@@ -24,7 +24,7 @@ VERSE
     expected = <<-VERSE
 2 bottles of beer on the wall, 2 bottles of beer.
 Take one down and pass it around, 1 bottle of beer on the wall.
-    VERSE
+VERSE
     expect( song.verse(2) ).to eq( expected )
   end
 
@@ -32,7 +32,7 @@ Take one down and pass it around, 1 bottle of beer on the wall.
     expected = <<-VERSE
 1 bottle of beer on the wall, 1 bottle of beer.
 Take it down and pass it around, no more bottles of beer on the wall.
-    VERSE
+VERSE
     expect( song.verse(1) ).to eq( expected )
   end
 
@@ -40,7 +40,7 @@ Take it down and pass it around, no more bottles of beer on the wall.
     expected = <<-VERSE
 No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
-    VERSE
+VERSE
     expect( song.verse(0) ).to eq( expected )
   end
 
@@ -67,6 +67,22 @@ No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
 VERSES
     expect( song.verses(2, 0) ).to eq( expected )
+  end
+  it "can handle a 6 pack of beer" do
+      expected = <<-VERSE
+7 bottles of beer on the wall, 7 bottles of beer.
+Take one down and pass it around, one 6 pack of beer on the wall.
+VERSE
+    expect( song.verse(7)).to eq (expected)
+  end
+    
+    
+  it "can handle a 6 pack of beer" do
+      expected = <<-VERSE
+One 6 pack of beer on the wall, one 6 pack of beer.
+Take one down and pass it around, 5 bottles of beer on the wall.
+VERSE
+    expect( song.verse(6)).to eq (expected)
   end
 
   it "can sing the whole song" do
@@ -348,9 +364,9 @@ Take one down and pass it around, 8 bottles of beer on the wall.
 Take one down and pass it around, 7 bottles of beer on the wall.
 
 7 bottles of beer on the wall, 7 bottles of beer.
-Take one down and pass it around, 6 bottles of beer on the wall.
+Take one down and pass it around, one 6 pack of beer on the wall.
 
-6 bottles of beer on the wall, 6 bottles of beer.
+One 6 pack of beer on the wall, one 6 pack of beer.
 Take one down and pass it around, 5 bottles of beer on the wall.
 
 5 bottles of beer on the wall, 5 bottles of beer.
